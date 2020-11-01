@@ -68,6 +68,16 @@
         }
     }
 
+    function compareBearing(heading, coords){
+        var markerLoc = turf.point(features[0]['geometry']['coordinates']);
+        var userLoc = turf.point(coords);
+        
+        var toMarkerBearing = turf.bearing(userLoc, markerLoc);
+        var bearingDiff = heading - toMarkerBearing;
+
+        alert(`user heading ${heading}; to marker ${toMarkerBearing}; difference ${bearingDiff}`)
+    }
+
     map.on("load", function(){
         map.addSource("markers", {
             "type":"geojson",
@@ -114,7 +124,7 @@
     // when a geolocate event occurs.
     geolocate.on('geolocate', function(e) {
         checkProximity([e.coords.longitude,e.coords.latitude])
-        console.log(e.coords.heading)
+        compareBearing(e.coords.heading, [e.coords.longitude,e.coords.latitude])
     });
 
     map.on('click', function (e) {
