@@ -142,7 +142,7 @@
     })
 
     // One-liner to resume playback when user interacted with the page.
-    document.querySelector('audio').addEventListener('click', function() {
+    document.querySelector('audio').addEventListener('click touchstart touchend touchmove', function() {
         context.resume().then(() => {
             console.log('Playback resumed successfully');
         });
